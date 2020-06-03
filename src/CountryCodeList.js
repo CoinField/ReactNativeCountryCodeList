@@ -5,9 +5,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   LayoutAnimation,
+  FlatList,
 } from "react-native";
 import { getAlphabet } from "./data";
-import AlphabetListView from "react-native-alphabetlistview";
 import Search from "react-native-search-box";
 import _ from "lodash";
 
@@ -39,15 +39,10 @@ class CountryCodeList extends React.Component {
           inputStyle={styles.searchInput}
           {...this.props.searchProps}
         />
-        <AlphabetListView
-          enableEmptySections={true}
+        <FlatList
           data={this.state.data}
-          cell={this.renderCell}
-          sectionListItem={this.renderSectionItem}
-          sectionHeader={this.renderSectionHeader}
-          cellHeight={this.props.cellHeight}
-          sectionHeaderHeight={this.props.sectionHeaderHeight}
-          {...this.props.alphabetListProps}
+          keyExtractor={(item, index) => `${index}country`}
+          renderItem={this.renderCell}
         />
       </View>
     );
